@@ -1,21 +1,22 @@
+#include <conio.h>
 #include <iostream>
-#include <cstdio>
 
 using namespace std;
 
+void clrscr(void);
+
 int main(void) {
 
-	// Total Number of Parking Spot
-
-	int num_parking_spot = 10;
+	int arr_c[5] = {};
 
 	char ent_ext_cls;
 
 	cout << "Enter A for Car Entrance, E for Exit or Z for Closing Program: ";
 
 	/*	Enter or Press 'A' for Car Entry
-	Enter or Press 'E' for Car Exit
-	Enter or Press 'Z' for Closing Program */
+		Enter or Press 'E' for Car Exit
+		Enter or Press 'Z' for Closing Program 
+	*/
 
 	cin >> ent_ext_cls;
 
@@ -24,48 +25,88 @@ int main(void) {
 	char(toupper(ent_ext_cls));
 
 	while (ent_ext_cls != 'Z') {
-		
-		if ((ent_ext_cls == 'A') && (num_parking_spot > 0)) {
 
-			num_parking_spot--;
+		clrscr();
 
-			cout << endl << "Current Parking Available: " << num_parking_spot << endl;
+		if (ent_ext_cls == 'A') {
+
+			int total_car = 0;
+
+			for (int i = 0; i < 5; i++) {
+
+				if (arr_c[i] == 0) {
+
+					arr_c[i] = 1;
+
+					cout << "Car is parked at spot " << i << endl;
+
+					break;
+
+				}
+
+				else if (arr_c[i] == 1)	{
+
+					total_car = total_car + 1;
+
+				}
+
+				if (total_car == 5) {
+
+					cout << "Car Parking Full! " << endl;
+
+					break;
+
+				}
+
+			}
 
 		}
-		else if ((ent_ext_cls == 'E') && (num_parking_spot < 10) && (num_parking_spot >= 0)) {
 
-			num_parking_spot++;
+		// car exit
 
-			cout << endl << "Current Parking Available: " << num_parking_spot << endl;
+		if (ent_ext_cls == 'E') {
+
+			int car_exit;
+
+			cout << "Determine the position of the car which is leaving: ";
+
+			cin >> car_exit;
+
+			if (arr_c[car_exit] == 0) {
+
+				cout << "This parking spot was vacant, enter a valid entry.";
+
+			}
+
+			else if (arr_c[car_exit] == 1) {
+
+				arr_c[car_exit] = 0;
+
+				cout << "Parking Spot " << car_exit << " now available for Parking! " << endl;
+
+			}
 
 		}
-		else if ((ent_ext_cls == 'A') && (num_parking_spot == 0)) {
 
-			cout << "Parking Full" << endl;
+		for (int i = 0; i < 5; i++) {
 
-		}
-		else if ((ent_ext_cls == 'E') && (num_parking_spot == 10)) {
-
-			cout << "Parking Empty" << endl;
+			cout << "Parking Spot: " << arr_c[i] << endl;
 
 		}
 
-		cout << "Awaiting User Feedback...";
+		cout << "Car Entry: A, Car Exit: B, Close Application: Z = ";
 
 		cin >> ent_ext_cls;
 
 		ent_ext_cls = toupper(ent_ext_cls);
 
-		
-	} // end while
 
-	cout << endl << " <<< Application Closed >>> " << endl;
+	} // end while
 
 	return 0;
 }
 
-/*
-Revision History:
-	First Pass: 02/14/2019 - Initial Release
-
-*/
+void clrscr(void)
+{
+	system("@cls||clear");
+}
