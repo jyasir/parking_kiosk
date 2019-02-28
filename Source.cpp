@@ -7,15 +7,24 @@ void clrscr(void);
 
 int main(void) {
 
-	int arr_c[5] = {};
+	int arr_c[6] = {};
+
+	int mode;
+
+	// if mode is eqs to 1, ascending order
+	// if mode is eqs to 2, descending order
+
+	cout << "Please enter the Parking Mode: ";
+	
+	cin >> mode;
 
 	char ent_ext_cls;
 
 	cout << "Enter A for Car Entrance, E for Exit or Z for Closing Program: ";
 
 	/*	Enter or Press 'A' for Car Entry
-		Enter or Press 'E' for Car Exit
-		Enter or Press 'Z' for Closing Program 
+	Enter or Press 'E' for Car Exit
+	Enter or Press 'Z' for Closing Program
 	*/
 
 	cin >> ent_ext_cls;
@@ -28,11 +37,13 @@ int main(void) {
 
 		clrscr();
 
-		if (ent_ext_cls == 'A') {
+		// third pass - changes start
+
+		if ((ent_ext_cls == 'A') && (mode == 1)) {
 
 			int total_car = 0;
 
-			for (int i = 0; i < 5; i++) {
+			for (int i = 0; i < 6; i++) {
 
 				if (arr_c[i] == 0) {
 
@@ -44,13 +55,13 @@ int main(void) {
 
 				}
 
-				else if (arr_c[i] == 1)	{
+				else if (arr_c[i] == 1) {
 
 					total_car = total_car + 1;
 
 				}
 
-				if (total_car == 5) {
+				if (total_car == 6) {
 
 					cout << "Car Parking Full! " << endl;
 
@@ -62,7 +73,43 @@ int main(void) {
 
 		}
 
-		// car exit
+		if ((ent_ext_cls == 'A') && (mode == 2)) {
+		
+			int total_car = 0;
+
+			for (int i = 6 ; i > 0 ; i--) {
+
+				if (arr_c[i] == 0) {
+
+					arr_c[i] = 1;
+
+					cout << "Car is parked at spot " << i << endl;
+
+					break;
+
+				}
+
+				else if (arr_c[i] == 1) {
+
+					total_car = total_car + 1;
+
+				}
+
+				if (total_car == 6) {
+
+					cout << "Car Parking Full! " << endl;
+
+					break;
+
+				}
+
+			}
+
+		}
+
+		// third pass - changes ends
+		
+		// car exit - start
 
 		if (ent_ext_cls == 'E') {
 
@@ -88,13 +135,17 @@ int main(void) {
 
 		}
 
-		for (int i = 0; i < 5; i++) {
+		// car exit - ends
 
+		for (int i = 0; i < 6; i++) {
+
+			if (i == 3) { cout << "Level 2" << endl; }
+			if (i == 0) { cout << "Level 1" << endl; }
 			cout << "Parking Spot: " << arr_c[i] << endl;
 
 		}
 
-		cout << "Car Entry: A, Car Exit: B, Close Application: Z = ";
+		cout << "Car Entry: A, Car Exit: E, Close Application: Z = ";
 
 		cin >> ent_ext_cls;
 
@@ -111,7 +162,8 @@ void clrscr(void)
 	system("@cls||clear");
 }
 
-/*
-Revision History:
-	Second Pass: 02/25/2019 - Second Release
+/* Revision Notes:
+
+	Third pass 03/2019
+	
 */
